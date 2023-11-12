@@ -4,14 +4,12 @@ import time
 import random
 from tkinter import Tk, Label, PhotoImage, CENTER
 
+import settings
+
 
 class DiceGame:
     """
     A simple dice game application using Tkinter.
-
-    Attributes:
-        TIME_STEP (float): The time delay between updating dice images during the roll animation.
-        SCROLL_COUNT (int): The number of times dice images are updated during the roll animation.
 
     Methods:
         __init__(self):
@@ -27,8 +25,6 @@ class DiceGame:
             Start and run the DiceGame application.
 
     """
-    TIME_STEP = 0.05
-    SCROLL_COUNT = 9
 
     def __init__(self):
         """
@@ -36,12 +32,12 @@ class DiceGame:
 
         Creates a Tkinter window with dice images, background, and user interaction setup.
         """
-        captures_folder = os.path.join(os.path.dirname(__file__), 'Captures')
-        self.icon_image = os.path.join(captures_folder, 'dice-icon.png')
-        self.background_image = os.path.join(captures_folder, 'background.png')
+        captures_folder = os.path.join(os.path.dirname(__file__), settings.CAPTURES_FOLDER)
+        self.icon_image = os.path.join(captures_folder, settings.DICE_ICON_NAME)
+        self.background_image = os.path.join(captures_folder, settings.BACKGROUND_NAME)
         self.root = Tk()
-        self.root.geometry('400x200')
-        self.root.title('Dice game! Take a shot!')
+        self.root.geometry(settings.SIZE_WINDOW)
+        self.root.title(settings.WINDOW_TITLE)
         self.root.resizable(height=False, width=False)
         self.root.iconphoto(True, PhotoImage(file=self.icon_image))
         self.background = PhotoImage(file=self.background_image)
@@ -58,12 +54,12 @@ class DiceGame:
         self.time_roll = None
 
         self.dice_images = [
-            os.path.join(captures_folder, 'dice-1-icon.png'),
-            os.path.join(captures_folder, 'dice-2-icon.png'),
-            os.path.join(captures_folder, 'dice-3-icon.png'),
-            os.path.join(captures_folder, 'dice-4-icon.png'),
-            os.path.join(captures_folder, 'dice-5-icon.png'),
-            os.path.join(captures_folder, 'dice-6-icon.png'),
+            os.path.join(captures_folder, settings.DICE_1_ICON_NAME),
+            os.path.join(captures_folder, settings.DICE_2_ICON_NAME),
+            os.path.join(captures_folder, settings.DICE_3_ICON_NAME),
+            os.path.join(captures_folder, settings.DICE_4_ICON_NAME),
+            os.path.join(captures_folder, settings.DICE_5_ICON_NAME),
+            os.path.join(captures_folder, settings.DICE_6_ICON_NAME),
         ]
 
     def dice_roll(self) -> str:
@@ -84,14 +80,14 @@ class DiceGame:
 
         """
         self.time_roll = 0.05
-        for _ in range(self.SCROLL_COUNT):
+        for _ in range(settings.SCROLL_COUNT):
             self.cube_1 = PhotoImage(file=self.dice_roll())
             self.cube_2 = PhotoImage(file=self.dice_roll())
             self.label_1['image'] = self.cube_1
             self.label_2['image'] = self.cube_2
             self.root.update()
             time.sleep(self.time_roll)
-            self.time_roll += self.TIME_STEP
+            self.time_roll += settings.TIME_STEP
 
     def run(self) -> None:
         """
