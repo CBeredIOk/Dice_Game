@@ -1,0 +1,17 @@
+
+# Virtual environment
+dice_game_venv/
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# PyCharm files
+.idea/
+
+# Compiled Python files
+__pycache__/
+
+# Other
+*.pyc
