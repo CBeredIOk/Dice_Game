@@ -36,7 +36,7 @@ class DiceGame:
         self.icon_image = os.path.join(captures_folder, settings.DICE_ICON_NAME)
         self.background_image = os.path.join(captures_folder, settings.BACKGROUND_NAME)
         self.root = Tk()
-        self.root.geometry(settings.SIZE_WINDOW)
+        self.root.geometry(settings.SIZE_WINDOW + settings.WINDOW_OPEN_COORDINATE)
         self.root.title(settings.WINDOW_TITLE)
         self.root.resizable(height=False, width=False)
         self.root.iconphoto(True, PhotoImage(file=self.icon_image))
